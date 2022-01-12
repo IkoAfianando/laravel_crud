@@ -22,7 +22,7 @@ php artisan db:seed
 If you want to make admin go to
 
 ```bash
-Auth>RegisteredUserController.php
+App>Http>Controllers>Auth>RegisteredUserController.php
 #and
 put $user->attachRole('admin'); if you want to make admin 
 #and 
