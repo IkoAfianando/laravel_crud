@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PemasukanController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $wargas = Warga::all();
         $rumahs = Rumah::all();
@@ -30,6 +30,7 @@ class PemasukanController extends Controller
                 <th>Nama Pemilik</th>
                 <th>Alamat</th>
                 <th>Iuran</th>
+                <th>Tanggal</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -41,6 +42,7 @@ class PemasukanController extends Controller
                 <td>' . $emp->nama_pemilik . '</td>
                 <td>' . $emp->alamat . '</td>
                 <td>Rp' . $emp->iuran . '</td>
+                <td>' . $emp->tanggal_pemasukan . '</td>
                 <td>
                   <a href="#" id="' . $emp->id . '" class="text-success mx-1 editIcon" data-bs-toggle="modal" data-bs-target="#editEmployeeModal"><i class="bi-pencil-square h4"></i></a>
 
@@ -63,6 +65,7 @@ class PemasukanController extends Controller
             'nama_pemilik' => $request->nama_pemilik,
             'alamat' => $request->alamat,
             'iuran' => $request->iuran,
+            'tanggal_pemasukan' => $request->tanggal_pemasukan,
         ];
         Pemasukan::create($empData);
         return response()->json([
@@ -84,7 +87,8 @@ class PemasukanController extends Controller
             'nomor_rumah' => $request->nomor_rumah,
             'alamat' => $request->alamat,
             'nama_pemilik' => $request->nama_pemilik,
-            'iuran' => $request->iuran
+            'iuran' => $request->iuran,
+            'tanggal_pemasukan' => $request->tanggal_pemasukan
         ];
         $iuran->update($empData);
         return response()->json([

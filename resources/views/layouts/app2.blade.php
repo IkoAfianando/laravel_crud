@@ -11,6 +11,7 @@
 
     <title>Pengelola RT</title>
 
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!-- Custom fonts for this template-->
     <link href={{asset("vendor/fontawesome-free/css/all.min.css")}} rel="stylesheet" type="text/css">
     <link
@@ -68,7 +69,6 @@
                     <h6 class="collapse-header">Master</h6>
                     <a class="collapse-item" href="{{"warga"}}">Data Warga</a>
                     <a class="collapse-item" href="{{"rumah"}}">Data Rumah</a>
-                    <a class="collapse-item" href="{{("employee")}}">Employee</a>
                 </div>
             </div>
         </li>
@@ -85,14 +85,14 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Data Pengeluaran</h6>
                     <a class="collapse-item" href="{{"pemasukan"}}">Iuran Hunian</a>
-                    <a class="collapse-item" href="/pengeluaran">Pengeluaran RT</a>
-                    <a class="collapse-item" href="/pengeluaran">Pengeluaran RT</a>
-                    <a class="collapse-item" href="/pengeluaran">Data Pengluaran</a>
+                    <a class="collapse-item" href="{{"pengeluaran"}}">Pengeluaran RT</a>
+                    <a class="collapse-item" href="/pengeluaran">Data Pengeluaran</a>
                     <a class="collapse-item" href="/pemasukan">Data Pemasukan</a>
                 </div>
             </div>
         </li>
 
+        @role('admin')
         <!-- Divider -->
         <hr class="sidebar-divider">
 
@@ -101,14 +101,6 @@
             Addons
         </div>
 
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-cogs"></i>
-                <span>Setting</span></a>
-        </li>
-
-        @role('admin')
         <!-- Nav Item - Tables -->
         <li class="nav-item">
             <a class="nav-link active" href="{{("admin")}}">
@@ -181,18 +173,6 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
-                            </a>
                             <div class="dropdown-divider"></div>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -200,7 +180,7 @@
                                 <x-dropdown-link :href="route('logout')"
                                                  onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Log Out!') }}
                                 </x-dropdown-link>
                             </form>
                         </div>

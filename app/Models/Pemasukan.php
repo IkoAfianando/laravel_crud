@@ -13,5 +13,6 @@ class Pemasukan extends Model
         'nama_pemilik',
         'alamat',
         'iuran',
+        'tanggal_pemasukan'
     ];
 }

@@ -19,6 +19,7 @@ class CreatePemasukansTable extends Migration
             $table->string('nama_pemilik');
             $table->string('alamat');
             $table->string('iuran');
+            $table->date('tanggal_pemasukan');
             $table->timestamps();
         });
     }
