@@ -5,6 +5,7 @@ use App\Http\Controllers\WargaController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\RumahController;
 use App\Http\Controllers\PemasukanController;
+use App\Http\Controllers\PengeluaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,9 @@ use App\Http\Controllers\PemasukanController;
 */
 
 Route::get('/', function () {
-    return view('layouts.app2');
-})->middleware('auth');
+    return view('landing.dashboard');
+});
+// ->middleware('auth')
 
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
@@ -65,6 +67,14 @@ Route::group(['middleware', ['role:admin|user']], function () {
     Route::get('/pemasukan.edit', [PemasukanController::class, 'pemasukan_edit'])->name('pemasukan.edit')->middleware(['auth']);
 });
 
+Route::group(['middleware', ['role:admin|user']], function () {
+    Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->middleware(['auth']);
+    Route::post('/pengeluaran.store', [PengeluaranController::class, 'pengeluaran_store'])->name('pengeluaran.store')->middleware(['auth']);
+    Route::post('/pengeluaran.update', [PengeluaranController::class, 'pengeluaran_update'])->name('pengeluaran.update')->middleware(['auth']);
+    Route::get('/pengeluaran.fetchall', [PengeluaranController::class, 'pengeluaran_fetchAll'])->name('pengeluaran.fetchAll')->middleware(['auth']);
+    Route::delete('/pengeluaran.delete', [PengeluaranController::class, 'pengeluaran_delete'])->name('pengeluaran.delete')->middleware(['auth']);
+    Route::get('/pengeluaran.edit', [PengeluaranController::class, 'pengeluaran_edit'])->name('pengeluaran.edit')->middleware(['auth']);
+});
 
 
 require __DIR__ . '/auth.php';
