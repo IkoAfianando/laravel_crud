@@ -7,6 +7,34 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Getting Started
+
+Before Migration
+
+```bash
+check on .env please create database first, and connect database on DB_DATABASE
+#
+php artisan migrate
+#
+php artisan db:seed 
+```
+
+If you want to make admin go to
+
+```bash
+Auth>RegisteredUserController.php
+#and
+put $user->attachRole('admin'); if you want to make admin 
+#and 
+$user->attachRole('user'); if you want to make user
+```
+
+First, run the development server:
+
+```bash
+php artisan serve
+# or
+```
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
