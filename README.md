@@ -12,6 +12,11 @@
 Before Migration
 
 ```bash
+#install
+npm install
+#install
+composer install / composer install --no-interaction --no-ansi
+ 
 check on .env please create database first, and connect database on DB_DATABASE
 #
 php artisan migrate
