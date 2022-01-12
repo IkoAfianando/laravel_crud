@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rumah;
+use App\Models\Pemasukan;
 use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class RumahController extends Controller
+class PemasukanController extends Controller
 {
-    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function index()
     {
         $wargas = Warga::all();
-        return view('data.rumah', compact('wargas'));
+        $rumahs = Rumah::all();
+        return view("pengeluaran.pemasukan",compact('wargas', 'rumahs'));
     }
 
-    public function rumah_fetchAll()
+    public function pemasukan_fetchAll()
     {
-        $emps = Rumah::all();
+        $emps = Pemasukan::all();
         $output = '';
         if ($emps->count() > 0) {
             $output .= '<table class="table table-striped table-responsive-lg table-responsive-md table-responsive-sm text-center align-middle">
@@ -25,10 +27,9 @@ class RumahController extends Controller
               <tr>
                 <th>ID</th>
                 <th>Nomor Rumah</th>
-                <th>Foto</th>
-                <th>Alamat</th>
                 <th>Nama Pemilik</th>
-                <th>Nama Penghuni</th>
+                <th>Alamat</th>
+                <th>Iuran</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -37,10 +38,9 @@ class RumahController extends Controller
                 $output .= '<tr>
                 <td>' . $emp->id . '</td>
                 <td>' . $emp->nomor_rumah . '</td>
-                <td><img src="storage/rumah/' . $emp->foto . '" width="70" class="figure-img" alt="Warga"></td>
-                <td>' . $emp->alamat . '</td>
                 <td>' . $emp->nama_pemilik . '</td>
-                <td>' . $emp->nama_penghuni . '</td>
+                <td>' . $emp->alamat . '</td>
+                <td>Rp' . $emp->iuran . '</td>
                 <td>
                   <a href="#" id="' . $emp->id . '" class="text-success mx-1 editIcon" data-bs-toggle="modal" data-bs-target="#editEmployeeModal"><i class="bi-pencil-square h4"></i></a>
 
@@ -56,64 +56,45 @@ class RumahController extends Controller
 
     }
 
-    public function rumah_store(Request $request): \Illuminate\Http\JsonResponse
+    public function pemasukan_store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $file = $request->file('foto');
-        $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/rumah', $fileName);
-
         $empData = [
             'nomor_rumah' => $request->nomor_rumah,
-            'foto' => $fileName,
-            'alamat' => $request->alamat,
             'nama_pemilik' => $request->nama_pemilik,
-            'nama_penghuni' => $request->nama_penghuni
+            'alamat' => $request->alamat,
+            'iuran' => $request->iuran,
         ];
-        Rumah::create($empData);
+        Pemasukan::create($empData);
         return response()->json([
             'status' => 200,
         ]);
     }
 
-    public function rumah_edit(Request $request): \Illuminate\Http\JsonResponse
+    public function pemasukan_edit(Request $request): \Illuminate\Http\JsonResponse
     {
         $id = $request->id;
-        $emp = Rumah::find($id);
+        $emp = Pemasukan::find($id);
         return response()->json($emp);
     }
 
-    public function rumah_update(Request $request): \Illuminate\Http\JsonResponse
+    public function pemasukan_update(Request $request): \Illuminate\Http\JsonResponse
     {
-        $rumah = Rumah::find($request->emp_id);
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/rumah', $fileName);
-            if ($rumah->foto) {
-                Storage::delete('public/rumah/' . $rumah->foto);
-            }
-        } else {
-            $fileName = $request->emp_foto;
-        }
+        $iuran = Pemasukan::find($request->emp_id);
         $empData = [
             'nomor_rumah' => $request->nomor_rumah,
-            'foto' => $fileName,
             'alamat' => $request->alamat,
             'nama_pemilik' => $request->nama_pemilik,
-            'nama_penghuni' => $request->nama_penghuni
+            'iuran' => $request->iuran
         ];
-        $rumah->update($empData);
+        $iuran->update($empData);
         return response()->json([
             'status' => 200,
         ]);
     }
 
-    public function rumah_delete(Request $request)
+    public function pemasukan_delete(Request $request)
     {
         $id = $request->id;
-        $emp = Rumah::find($id);
-        if (Storage::delete('public/rumah/' . $emp->foto)) {
-            Rumah::destroy($id);
-        }
+        Pemasukan::destroy($id);
     }
 }

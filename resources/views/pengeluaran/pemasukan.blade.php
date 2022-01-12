@@ -11,26 +11,19 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rumah</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Iuran Rumah</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="#" method="POST" id="add_employee_form" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body p-4 bg-light">
-                        <div class="row">
-                            <div class="col-lg">
-                                <label for="nomor_rumah">Nomor Rumah</label>
-                                <input type="text" name="nomor_rumah" class="form-control" placeholder="Nomor Rumah"
-                                       required>
-                            </div>
-                            <div class="my-2">
-                                <label for="foto">Foto</label>
-                                <input type="file" name="foto" class="form-control" required>
-                            </div>
-                            <div class="my-2">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" name="alamat" class="form-control" required>
-                            </div>
+                        <div class="my-2">
+                            <label for="nomor_rumah">Nomor Rumah</label>
+                            <select class="form-select" name="nomor_rumah" aria-label="Default select example">
+                                @foreach($rumahs as $rumah)
+                                    <option value="{{$rumah->nomor_rumah}}">{{$rumah->nomor_rumah}}</option>
+                                @endforeach
+                            </select>
                             <div class="my-2">
                                 <label for="nama_pemilik">Nama Pemilik</label>
                                 <select class="form-select" name="nama_pemilik" aria-label="Default select example">
@@ -40,12 +33,14 @@
                                 </select>
                             </div>
                             <div class="my-2">
-                                <label for="nama_penghuni">Nama Penghuni</label>
-                                <select class="form-select" name="nama_penghuni" aria-label="Default select example">
-                                    @foreach($wargas as $warga)
-                                        <option value="{{$warga->name}}">{{$warga->name}}</option>
-                                    @endforeach
-                                </select>
+                                <label for="alamat">Alamat</label>
+                                <input type="text" name="alamat" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="my-2">
+                                <label for="iuran">Iuran</label>
+                                <input type="number" name="iuran" class="form-control" required>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -65,60 +60,45 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Rumah</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Iuran</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="#" method="POST" id="edit_employee_form" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="emp_id" id="emp_id">
-                    <input type="hidden" name="emp_avatar" id="emp_avatar">
                     <div class="modal-body p-4 bg-light">
                         <div class="row">
-                            <div class="col-lg">
+                            <div class="my-2">
                                 <label for="nomor_rumah">Nomor Rumah</label>
-                                <input type="text" name="nomor_rumah" id="nomor_rumah" class="form-control" placeholder="Name"
-                                       required>
+                                <select id="nomor_rumah" class="form-select" name="nomor_rumah"
+                                        aria-label="Default select example">
+                                    @foreach($rumahs as $rumah)
+                                        <option value="{{$rumah->nomor_rumah}}">{{$rumah->nomor_rumah}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="my-2">
-                                <label for="foto">Foto</label>
-                                <input type="file" name="foto" class="form-control" required>
-                            </div>
-                            <div class="mt-2" id="foto">
-
+                                <label for="nama_pemilik">Nama Pemilik</label>
+                                <select id="nama_pemilik" class="form-select" name="nama_pemilik"
+                                        aria-label="Default select example">
+                                    @foreach($wargas as $warga)
+                                        <option value="{{$warga->name}}">{{$warga->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="my-2">
                                 <label for="alamat">Alamat</label>
                                 <input type="text" name="alamat" id="alamat" class="form-control" required>
                             </div>
-                        </div>
-                        <div class="my-2">
-                            <label for="nama_pemilik">Nama Pemilik</label>
-                            <select id="nama_pemilik" class="form-select" name="nama_pemilik"
-                                    aria-label="Default select example">
-                                @foreach($wargas as $warga)
-                                    <option value="{{$warga->name}}">{{$warga->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="my-2">
-                            <label for="nama_penghuni">Nama Penghuni</label>
-                            <select id="nama_penghuni" class="form-select" name="nama_penghuni"
-                                    aria-label="Default select example">
-                                @foreach($wargas as $warga)
-                                    <option value="{{$warga->name}}">{{$warga->name}}</option>
-                                @endforeach
-                            </select>
-                            <hr>
-                            <select class="form-select" name="nama_penghuni" aria-label="Default select example">
-                                @foreach($wargas as $warga)
-                                    <option value="{{$warga->name}}">{{$warga->name}}</option>
-                                @endforeach
-                            </select>
+                            <div class="my-2">
+                                <label for="iuran">Iuran</label>
+                                <input type="number" name="iuran" id="iuran" class="form-control" required>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="edit_employee_btn" class="btn btn-success">Update Data Rumah</button>
+                        <button type="submit" id="edit_employee_btn" class="btn btn-success">Update Data Iuran</button>
                     </div>
                 </form>
             </div>
@@ -132,9 +112,9 @@
             <div class="col-lg-12">
                 <div class="card shadow">
                     <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-                        <h3 class="text-light">Data Rumah</h3>
+                        <h3 class="text-light">Data Iuran</h3>
                         <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addEmployeeModal"><i
-                                class="bi-plus-circle me-2"></i>Tambah Data Rumah
+                                class="bi-plus-circle me-2"></i>Tambah Data Iuran
                         </button>
                     </div>
                     <div class="card-body" id="show_all_employees">
@@ -159,7 +139,7 @@
                     const fd = new FormData(this);
                     $("#add_employee_btn").text('Adding...');
                     $.ajax({
-                        url: '{{ route('rumah.store') }}',
+                        url: '{{ route('pemasukan.store') }}',
                         method: 'post',
                         data: fd,
                         cache: false,
@@ -170,12 +150,12 @@
                             if (response.status === 200) {
                                 Swal.fire(
                                     'Added!',
-                                    'Data Added Successfully!',
+                                    'Iuran Added Successfully!',
                                     'success'
                                 )
-                                fetchAllRumah();
+                                fetchAllPemasukan();
                             }
-                            $("#add_employee_btn").text('Add Warga');
+                            $("#add_employee_btn").text('Add Iuran');
                             $("#add_employee_form")[0].reset();
                             $("#addEmployeeModal").modal('hide');
                         }
@@ -186,7 +166,7 @@
                     e.preventDefault();
                     let id = $(this).attr('id');
                     $.ajax({
-                        url: '{{ route('rumah.edit') }}',
+                        url: '{{ route('pemasukan.edit') }}',
                         method: 'get',
                         data: {
                             id: id,
@@ -194,12 +174,10 @@
                         },
                         success: function (res) {
                             $("#nomor_rumah").val(res.nomor_rumah);
-                            $("#foto").html(`<img src="storage/rumah/${res.foto}" width="100" class="img-fluid img-thumbnail" alt="image">`)
                             $("#alamat").val(res.alamat);
                             $("#nama_pemilik").val(res.nama_pemilik);
-                            $("#nama_penghuni").val(res.nama_penghuni);
+                            $("#iuran").val(res.iuran);
                             $("#emp_id").val(res.id);
-                            $("#emp_avatar").val(res.foto);
                         }
                     })
                 })
@@ -209,7 +187,7 @@
                     const fd = new FormData(this);
                     $("#edit_employee_btn").text("Updating...");
                     $.ajax({
-                        url: '{{route("rumah.update") }}',
+                        url: '{{route("pemasukan.update") }}',
                         method: 'post',
                         data: fd,
                         cache: false,
@@ -220,12 +198,12 @@
                             if (response.status === 200) {
                                 Swal.fire(
                                     'Updated!',
-                                    'Rumah Data Updated Successfully!',
+                                    'Pemasukan Data Updated Successfully!',
                                     'success'
                                 )
-                                fetchAllRumah();
+                                fetchAllPemasukan();
                             }
-                            $("#edit_employee_btn").text('Update Employee');
+                            $("#edit_employee_btn").text('Update Data Pemasukan');
                             $("#edit_employee_form")[0].reset();
                             $("#editEmployeeModal").modal('hide');
                         },
@@ -247,7 +225,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: '{{ route('rumah.delete') }}',
+                                url: '{{ route('pemasukan.delete') }}',
                                 method: 'delete',
                                 data: {
                                     id: id,
@@ -259,18 +237,18 @@
                                         'Your Data has been deleted.',
                                         'success'
                                     )
-                                    fetchAllRumah();
+                                    fetchAllPemasukan();
                                 }
                             });
                         }
                     })
                 });
 
-                fetchAllRumah();
+                fetchAllPemasukan();
 
-                function fetchAllRumah() {
+                function fetchAllPemasukan() {
                     $.ajax({
-                        url: "{{ route('rumah.fetchAll') }}",
+                        url: "{{ route('pemasukan.fetchAll') }}",
                         method: "GET",
                         success: function (data) {
                             $("#show_all_employees").html(data);

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\RumahController;
+use App\Http\Controllers\PemasukanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Route::get('/dashboard', function () {
-    return view('layouts.app2');
+    return view('dashboard.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 Route::group(['middleware' => ['role:admin']], function () {
@@ -54,6 +55,16 @@ Route::group(['middleware', ['role:admin|user']], function () {
     Route::delete('/rumah.delete', [RumahController::class, 'rumah_delete'])->name('rumah.delete')->middleware(['auth']);
     Route::get('/rumah.edit', [RumahController::class, 'rumah_edit'])->name('rumah.edit')->middleware(['auth']);
 });
+
+Route::group(['middleware', ['role:admin|user']], function () {
+    Route::get('/pemasukan', [PemasukanController::class, 'index'])->middleware(['auth']);
+    Route::post('/pemasukan.store', [PemasukanController::class, 'pemasukan_store'])->name('pemasukan.store')->middleware(['auth']);
+    Route::post('/pemasukan.update', [PemasukanController::class, 'pemasukan_update'])->name('pemasukan.update')->middleware(['auth']);
+    Route::get('/pemasukan.fetchall', [PemasukanController::class, 'pemasukan_fetchAll'])->name('pemasukan.fetchAll')->middleware(['auth']);
+    Route::delete('/pemasukan.delete', [PemasukanController::class, 'pemasukan_delete'])->name('pemasukan.delete')->middleware(['auth']);
+    Route::get('/pemasukan.edit', [PemasukanController::class, 'pemasukan_edit'])->name('pemasukan.edit')->middleware(['auth']);
+});
+
 
 
 require __DIR__ . '/auth.php';

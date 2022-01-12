@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pengeolola RT | Dashboard</title>
+    <title>Pengelola RT</title>
 
     <!-- Custom fonts for this template-->
     <link href={{asset("vendor/fontawesome-free/css/all.min.css")}} rel="stylesheet" type="text/css">
@@ -66,8 +66,8 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Master</h6>
-                    <a class="collapse-item" href="/warga">Data Warga</a>
-                    <a class="collapse-item" href="/rumah">Data Rumah</a>
+                    <a class="collapse-item" href="{{"warga"}}">Data Warga</a>
+                    <a class="collapse-item" href="{{"rumah"}}">Data Rumah</a>
                     <a class="collapse-item" href="{{("employee")}}">Employee</a>
                 </div>
             </div>
@@ -84,10 +84,11 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Data Pengeluaran</h6>
-                    <a class="collapse-item" href="utilities-color.html">Iuran Hunian</a>
-                    <a class="collapse-item" href="utilities-border.html">Pengeluaran RT</a>
-                    <a class="collapse-item" href="utilities-animation.html">Data Pengluaran</a>
-                    <a class="collapse-item" href="utilities-animation.html">Data Pemasukan</a>
+                    <a class="collapse-item" href="{{"pemasukan"}}">Iuran Hunian</a>
+                    <a class="collapse-item" href="/pengeluaran">Pengeluaran RT</a>
+                    <a class="collapse-item" href="/pengeluaran">Pengeluaran RT</a>
+                    <a class="collapse-item" href="/pengeluaran">Data Pengluaran</a>
+                    <a class="collapse-item" href="/pemasukan">Data Pemasukan</a>
                 </div>
             </div>
         </li>
