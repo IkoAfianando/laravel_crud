@@ -22,6 +22,8 @@ check on .env please create database first, and connect database on DB_DATABASE
 php artisan migrate
 #
 php artisan db:seed 
+#
+php artisan storage:link
 ```
 
 If you want to make admin go to
