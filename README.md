@@ -31,7 +31,7 @@ If you want to make admin go to
 ```bash
 App>Http>Controllers>Auth>RegisteredUserController.php
 #and
-put $user->attachRole('admin'); if you want to make admin 
+$user->attachRole('admin'); if you want to make admin 
 #and 
 $user->attachRole('user'); if you want to make user
 ```
@@ -40,7 +40,6 @@ First, run the development server:
 
 ```bash
 php artisan serve
-# or
 ```
 ## About Laravel
 
